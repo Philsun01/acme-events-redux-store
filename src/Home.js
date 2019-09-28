@@ -1,9 +1,9 @@
 import React from 'react';
 import connect from './connect';
 
-const Home = () => {
+const Home = ({ events }) => {
   return (
-    <h1>Homepage</h1>
+    <h1>You got {events.length} events!</h1>
   );
 };
 

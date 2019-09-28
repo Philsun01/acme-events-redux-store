@@ -4,6 +4,8 @@ import axios from 'axios';
 const eventsReducer = (state = [], action) => {
   if(action.type === 'SET_EVENT'){
     return action.events;
+  } else if(action.type === 'ADD_EVENT') {
+    return [...state, action.event]
   }
   return state;
 };
@@ -21,5 +23,9 @@ const fetchEvents = async() => {
   store.dispatch({ type: 'SET_EVENT', events });
 };
 
+const addEvent = async () => {
+  store.dispatch({ event: (await axios.post('/api/events')).data, type: 'ADD_EVENT' });
+};
+
 export default store;
-export { fetchEvents };
+export { fetchEvents, addEvent };
