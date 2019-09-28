@@ -1,4 +1,5 @@
 const faker = require('faker');
+
 faker.locale = 'en_US';
 const Sequelize = require('sequelize');
 const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_event_store_db', { logging: false });
