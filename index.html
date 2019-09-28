@@ -5,7 +5,7 @@
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.4/redux.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js'></script>
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js'></script>
 <style>
@@ -28,6 +28,50 @@ a {
   <body>
     <div id='root'></div>
     <script type='text/babel'>
+      //Create our App component
+      //Put all data into redux store
+      //  - create redux store
+      //  - create the reducers
+      //  - connect , subscribe
+
+      //const { HashRouter, Route } = require('reacter-router-dom');
+      const { Switch, Link, Route, HashRouter, NavLink } = ReactRouterDOM;
+
+      const Home = () =><h1>Homepage</h1>;
+      const Nav = () =>{
+        const links = [
+          { text: 'Home', to: '/'},
+          { text: 'Events', to: '/events'},
+        ];
+        return(
+          <nav>
+            {
+              links.map(link =>
+                <NavLink key = {link.text} to = {link.to}> {link.text}</NavLink>
+              )
+            }
+            </nav>
+        )
+      };
+      const Events = () =><h1>Eventspage</h1>;
+
+      class App extends React.Component{
+        componentDidMount(){
+          fetchEvents();
+        }
+
+        render(){
+          return (
+            <HashRouter>
+              <h1>Acme Event Planner With Redux</h1>
+              <Route component = {Nav} />
+              <Route path = '/' component = {Home} exact/>
+              <Route path = '/events' component = {Events} />
+            </HashRouter>
+
+          );
+        }
+      }
 
       const connect = (Component)=> {
         class Connected extends React.Component{
@@ -53,7 +97,7 @@ a {
 
 
 
-      //ReactDOM.render(<App />, document.querySelector('#root'));
+      ReactDOM.render(<App />, document.querySelector('#root'));
 
     </script>
   </body>
