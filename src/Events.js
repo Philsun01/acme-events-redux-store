@@ -1,6 +1,6 @@
 import React from 'react';
 import connect from './connect';
-import { addEvent } from './store';
+import { addEvent, deleteEvent } from './store';
 
 const Events = ({ events }) => {
   return (
@@ -8,7 +8,7 @@ const Events = ({ events }) => {
       <button onClick={ addEvent }>Create</button>
       <ul>
         {
-          events.map(event => <li key={event.id}>{event.name}</li>)
+          events.map(event => <li key={event.id} onClick={ () => deleteEvent(event.id) }>{event.name}</li>)
         }
       </ul>
     </div>

@@ -5,7 +5,9 @@ const eventsReducer = (state = [], action) => {
   if(action.type === 'SET_EVENT'){
     return action.events;
   } else if(action.type === 'ADD_EVENT') {
-    return [...state, action.event]
+    return [...state, action.event];
+  } else if(action.type === 'DEL_EVENT') {
+    return [...state.filter(event => event.id !== action.event.id )];
   }
   return state;
 };
@@ -27,5 +29,9 @@ const addEvent = async () => {
   store.dispatch({ event: (await axios.post('/api/events')).data, type: 'ADD_EVENT' });
 };
 
+const deleteEvent = async (id) => {
+  store.dispatch({ event: (await axios.delete(`/api/events/${id}`)), type: 'DEL_EVENT' });
+};
+
 export default store;
-export { fetchEvents, addEvent };
+export { fetchEvents, addEvent, deleteEvent };
