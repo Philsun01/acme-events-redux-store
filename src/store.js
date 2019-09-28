@@ -7,7 +7,7 @@ const eventsReducer = (state = [], action) => {
   } else if(action.type === 'ADD_EVENT') {
     return [...state, action.event];
   } else if(action.type === 'DEL_EVENT') {
-    return [...state.filter(event => event.id !== action.event.id )];
+    return [...state.filter(event => action.event.id !== event.id)];
   }
   return state;
 };
