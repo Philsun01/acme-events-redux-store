@@ -1,6 +1,8 @@
 import React from 'react';
 import {Switch, Link, Route, HashRouter, NavLink} from 'react-router-dom';
 
+import store, { fetchEvents } from './store';
+
 const Home = () =><h1>Homepage</h1>;
 
 const Nav = () =>{

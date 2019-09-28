@@ -1,7 +1,7 @@
 const faker = require('faker');
 faker.locale = 'en_US';
 const Sequelize = require('sequelize');
-const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_event_store_db');
+const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/acme_event_store_db', { logging: false });
 const Event = conn.define('event', {
   name: {
     type: Sequelize.STRING,
@@ -29,7 +29,11 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
-app.listen(port);
+app.listen(port, () => console.log(`listening on port ${port}`));
+
+app.get('/dist/main.js', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'dist/main.js'));
+});
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
